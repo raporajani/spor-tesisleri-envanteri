@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spor Tesisleri Şube Müdürlüğü — Modül ve Alt Modül Envanteri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F172A;--navy-2:#1E293B;--navy-3:#334155;
+    --turq:#0EA5E9;--turq-dark:#0284C7;--turq-light:#F0F9FF;
+    --petrol:#0E7C6B;--petrol-dark:#0A5E52;
+    --bg:#F8FAFC;--card:#FFFFFF;--border:#E2E8F0;--border-strong:#CBD5E1;
+    --text:#0F172A;--text-2:#475569;--text-3:#94A3B8;
+    
+    /* Enterprise Soft Pastel Palette - WCAG AA Compliant */
+    --crit-bg:#FEE2E2;--crit-fg:#991B1B;--crit-bd:#FCA5A5;
+    --high-bg:#FEF3C7;--high-fg:#92400E;--high-bd:#FDE68A;
+    --mid-bg:#E0F2FE;--mid-fg:#075985;--mid-bd:#BAE6FD;
+    --low-bg:#F1F5F9;--low-fg:#334155;--low-bd:#CBD5E1;
+    
+    --radius:12px;--radius-sm:8px;
+    --shadow:0 1px 3px rgba(15,23,42,.04),0 4px 12px rgba(15,23,42,.03);
+    --shadow-hover:0 8px 24px -4px rgba(15,23,42,.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5;padding-bottom:64px;}
+  a{color:inherit;}
+  
+  /* Header Component */
+  .topbar{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:32px 40px;box-shadow:0 4px 16px rgba(15,23,42,.08);}
+  .topbar h1{margin:0 0 8px;font-size:24px;font-weight:700;letter-spacing:-.015em;line-height:1.2;}
+  .topbar p.sub{margin:0;color:#94A3B8;font-size:14px;font-weight:500;}
+  
+  /* KPI Statistics Cards - 8pt Grid */
+  .stats-bar{max-width:1280px;margin:24px auto 0;padding:0 40px;}
+  .stats-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;}
+  .stat-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 12px;border:1px solid var(--border);text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all 180ms ease-out;}
+  .stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover);border-color:#CBD5E1;}
+  .stat-card .num{font-size:32px;font-weight:800;color:var(--navy);line-height:1.1;letter-spacing:-.02em;}
+  .stat-card .lbl{font-size:12px;font-weight:600;color:var(--text-2);margin-top:8px;line-height:1.2;display:flex;align-items:center;gap:4px;}
+  .stat-card.crit .num{color:var(--crit-fg);}
+  .stat-card.high .num{color:var(--high-fg);}
+  .stat-card.mid .num{color:var(--mid-fg);}
+  .stat-card.low .num{color:var(--low-fg);}
+  
+  /* Control Bar & Enterprise Form Controls */
+  .controls{max-width:1280px;margin:24px auto 0;padding:0 40px;}
+  .controls-inner{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 24px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;}
+  .controls-inner input[type=text]{flex:1 1 220px;min-width:180px;padding:8px 16px;border:1px solid var(--border-strong);border-radius:var(--radius-sm);font-size:13.5px;font-family:inherit;color:var(--text);background:#fff;transition:all 180ms ease-out;}
+  .controls-inner input[type=text]:focus{border-color:var(--turq);box-shadow:0 0 0 3px rgba(14,165,233,.18);outline:none;}
+  .controls-inner select{padding:8px 32px 8px 16px;border:1px solid var(--border-strong);border-radius:var(--radius-sm);font-size:13.5px;font-family:inherit;color:var(--text);background:#fff url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23475569%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E") no-repeat right 12px top 50%;background-size:10px auto;appearance:none;-webkit-appearance:none;transition:all 180ms ease-out;}
+  .controls-inner select:focus{border-color:var(--turq);box-shadow:0 0 0 3px rgba(14,165,233,.18);outline:none;}
+  .btn{padding:8px 16px;border-radius:var(--radius-sm);border:1px solid var(--border-strong);background:#fff;color:var(--navy);font-size:13.5px;font-family:inherit;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 180ms ease-out;}
+  .btn:hover{background:#F1F5F9;border-color:#94A3B8;}
+  .btn.active{background:var(--turq-dark);border-color:var(--turq-dark);color:#fff;}
+  .btn.primary{background:var(--navy);border-color:var(--navy);color:#fff;}
+  .btn.primary:hover{background:var(--navy-2);}
+  .btn.edit-toggle.on{background:var(--petrol);border-color:var(--petrol-dark);color:#fff;}
+  .btn.save-btn{background:#166534;border-color:#145e2c;color:#fff;display:none;align-items:center;gap:8px;}
+  .btn.save-btn.visible{display:inline-flex;animation:pulseSave 1.8s infinite;}
+  .btn.save-btn:hover{background:#15803D;}
+  @keyframes pulseSave{0%,100%{box-shadow:0 0 0 0 rgba(22,101,52,.4);}50%{box-shadow:0 0 0 6px rgba(22,101,52,0);}}
+  .spacer{flex:1 1 auto;}
+  
+  /* Fluent 2 First-Class Parent Module Section */
+  .modules{max-width:1280px;margin:24px auto 0;padding:0 40px;display:flex;flex-direction:column;gap:32px;}
+  .module{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:all 180ms ease-out;}
+  .module:hover{box-shadow:var(--shadow-hover);border-color:#CBD5E1;}
+  .module.dragging{opacity:.4;}
+  
+  /* Fluent 2 Enterprise Module Header Bar */
+  .module-head{display:flex;gap:24px;padding:32px;cursor:pointer;align-items:center;background:#F8FAFC;border-bottom:1px solid var(--border);transition:background-color 180ms ease-out;}
+  .module-head:hover{background:#F1F5F9;}
+  .module.collapsed .module-head{border-bottom:none;}
+  .module-drag-handle{display:none;align-items:center;color:var(--text-3);cursor:grab;font-size:18px;padding-right:8px;}
+  body.edit-mode .module-drag-handle{display:flex;}
+  
+  /* Dashed Image Thumbnail Container */
+  .module-img{width:170px;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#ffffff;color:var(--text-3);border:2px dashed var(--border-strong);border-radius:var(--radius-sm);position:relative;overflow:hidden;min-height:112px;align-self:center;transition:all 180ms ease-out;}
+  .module-img:hover{border-color:var(--turq);background:var(--turq-light);}
+  .module-img .icon{font-size:36px;color:var(--turq-dark);margin-bottom:4px;}
+  .module-img .cap{font-size:11px;font-weight:600;color:var(--text-2);text-align:center;padding:0 8px;}
+  .module-img .zoom-btn{position:absolute;top:8px;right:8px;background:#fff;border:1px solid var(--border-strong);border-radius:6px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--navy);cursor:pointer;z-index:2;box-shadow:0 2px 4px rgba(0,0,0,.06);transition:all 180ms ease-out;}
+  .module-img .zoom-btn:hover{background:var(--turq-light);border-color:var(--turq);}
+  
+  /* Module Info Section Typography (Fluent 2 Scale) */
+  .module-info{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;}
+  .module-info-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 4px 0;}
+  .module-info h2{margin:0;font-size:28px;font-weight:700;color:#0F172A;letter-spacing:-.02em;line-height:1.2;}
+  input.module-name-input{font-size:28px;font-weight:700;color:#0F172A;width:100%;border:1px solid transparent;background:transparent;padding:0;margin:0;border-radius:6px;letter-spacing:-.02em;line-height:1.2;}
+  input.module-name-input:disabled{cursor:default;-webkit-text-fill-color:#0F172A;opacity:1;}
+  textarea.module-desc-input{width:100%;min-height:24px;resize:vertical;font-family:inherit;font-size:15px;font-weight:400;color:#475569;border:1px solid transparent;background:transparent;padding:0;margin:4px 0 12px 0;border-radius:6px;line-height:1.5;}
+  textarea.module-desc-input:disabled{cursor:default;-webkit-text-fill-color:#475569;opacity:1;resize:none;overflow:hidden;}
+  body.edit-mode input.module-name-input:not(:disabled){border-color:var(--border-strong);background:#fff;padding:4px 8px;margin-left:-8px;}
+  body.edit-mode textarea.module-desc-input:not(:disabled){border-color:var(--border-strong);background:#fff;padding:4px 8px;margin-left:-8px;}
+  body.edit-mode input.module-name-input:not(:disabled):focus,body.edit-mode textarea.module-desc-input:not(:disabled):focus{border-color:var(--turq);outline:none;}
+  
+  /* Soft Pastel Badges System */
+  .module-badges{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0;padding:0;}
+  .badge{font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;border:1px solid transparent;letter-spacing:.01em;transition:all 180ms ease-out;}
+  .badge.total{background:#F1F5F9;color:var(--navy);border-color:var(--border-strong);}
+  .badge.crit{background:var(--crit-bg);color:var(--crit-fg);border-color:var(--crit-bd);}
+  .badge.high{background:var(--high-bg);color:var(--high-fg);border-color:var(--high-bd);}
+  .badge.mid{background:var(--mid-bg);color:var(--mid-fg);border-color:var(--mid-bd);}
+  .badge.low{background:var(--low-bg);color:var(--low-fg);border-color:var(--low-bd);}
+  
+  /* Chevron Action Button */
+  .chevron-wrap{flex:0 0 auto;width:36px;height:36px;border-radius:8px;border:1px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all 180ms ease-out;}
+  .module-head:hover .chevron-wrap{border-color:var(--border-strong);background:#fff;}
+  .chevron{color:var(--text-2);font-size:18px;transition:transform 180ms ease-out;}
+  .module.collapsed .chevron{transform:rotate(-90deg);}
+  .module-body{border-top:1px solid var(--border);}
+  .module.collapsed .module-body{display:none;}
+  
+  /* Table Component & Custom Selects */
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;max-height:600px;}
+  table.fn-table{width:100%;border-collapse:separate;border-spacing:0;min-width:780px;}
+  table.fn-table th{position:sticky;top:0;z-index:5;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--text-3);padding:12px 16px;background:#F8FAFC;border-bottom:1px solid var(--border);font-weight:600;}
+  table.fn-table th:nth-child(4),table.fn-table th:nth-child(5),table.fn-table th:nth-child(7){text-align:center;}
+  table.fn-table td{padding:12px 16px;font-size:13.5px;border-bottom:1px solid var(--border);vertical-align:middle;background:#fff;}
+  table.fn-table td:nth-child(4),table.fn-table td:nth-child(5),table.fn-table td:nth-child(7){text-align:center;}
+  table.fn-table tr.fn-row{cursor:pointer;transition:background-color 180ms ease-out;}
+  table.fn-table tr.fn-row:hover td{background:#F1F5F9;}
+  table.fn-table tr.fn-row.dragging{opacity:.35;}
+  table.fn-table tr.hidden-row{display:none;}
+  td.fn-name{font-weight:600;color:var(--navy);white-space:nowrap;min-width:180px;}
+  td.fn-desc{color:var(--text-2);min-width:240px;max-width:360px;line-height:1.5;}
+  .drag-handle-row{display:none;color:var(--text-3);cursor:grab;font-size:15px;padding-right:4px;}
+  body.edit-mode .drag-handle-row{display:inline-block;}
+  
+  /* Keyboard Accessibility Focus States (WCAG AA) */
+  button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--turq);
+    outline-offset: 2px;
+  }
+  
+  select.imp-select,select.status-select,span.badge{font-size:11.5px;font-weight:700;border-radius:20px;padding:4px 12px;border:1px solid transparent;cursor:pointer;appearance:none;-webkit-appearance:none;text-align:center;text-align-last:center;display:inline-flex;align-items:center;justify-content:center;letter-spacing:.02em;box-sizing:border-box;box-shadow:0 1px 2px rgba(0,0,0,.03);}
+  select.imp-select:disabled,select.status-select:disabled{cursor:default;opacity:1;-webkit-text-fill-color:currentColor;}
+  select.imp-select option,select.status-select option{background:#fff;color:var(--navy);text-align:left;font-weight:600;}
+  select.imp-select.Kritik,span.badge.Kritik{background:var(--crit-bg);color:var(--crit-fg);border-color:var(--crit-bd);}
+  select.imp-select.Yüksek,span.badge.Yüksek{background:var(--high-bg);color:var(--high-fg);border-color:var(--high-bd);}
+  select.imp-select.Orta,span.badge.Orta{background:var(--mid-bg);color:var(--mid-fg);border-color:var(--mid-bd);}
+  select.imp-select.Düşük,span.badge.Düşük{background:var(--low-bg);color:var(--low-fg);border-color:var(--low-bd);}
+  
+  select.status-select[data-status="Aktif"],span.badge[data-status="Aktif"]{background:#DCFCE7;color:#166534;border-color:#BBF7D0;}
+  select.status-select[data-status="Pasif"],span.badge[data-status="Pasif"]{background:#FEE2E2;color:#991B1B;border-color:#FCA5A5;}
+  select.status-select[data-status="Eski Ekran"],span.badge[data-status="Eski Ekran"]{background:#F1F5F9;color:#475569;border-color:#CBD5E1;}
+  select.status-select[data-status="Yeni Sürüm"],span.badge[data-status="Yeni Sürüm"]{background:#DBEAFE;color:#1E40AF;border-color:#BFDBFE;}
+  select.status-select[data-status="İncelenecek"],span.badge[data-status="İncelenecek"]{background:#FEF3C7;color:#92400E;border-color:#FDE68A;}
+  select.status-select[data-status="Birleştirilebilir"],span.badge[data-status="Birleştirilebilir"]{background:#F3E8FF;color:#6B21A8;border-color:#E9D5FF;}
+  select.status-select{background:#F1F5F9;color:var(--navy);border-color:var(--border-strong);}
+  
+  .note-input{width:150px;font-size:12.5px;padding:6px 10px;border:1px solid var(--border-strong);border-radius:var(--radius-sm);color:var(--text);background:#fff;transition:all 180ms ease-out;}
+  .note-input:focus{border-color:var(--turq);outline:none;}
+  .note-input:disabled{background:transparent;border-color:transparent;color:var(--text-2);padding-left:0;}
+  .note-input::placeholder{color:var(--text-3);}
+  .row-actions{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;}
+  .icon-btn{width:30px;height:30px;border-radius:var(--radius-sm);border:1px solid var(--border-strong);background:#fff;color:var(--text-2);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all 180ms ease-out;}
+  .icon-btn:hover{background:#F1F5F9;color:var(--navy);border-color:var(--navy);}
+  .icon-btn.danger{color:var(--crit-fg);}
+  .icon-btn.danger:hover{background:var(--crit-bg);border-color:var(--crit-bd);}
+  .icon-btn[data-role="delrow"],.module-delete-btn{display:none;}
+  body.edit-mode .icon-btn[data-role="delrow"],body.edit-mode .module-delete-btn{display:inline-flex;}
+  
+  input.name-input{width:100%;font-weight:600;color:var(--navy);font-size:14px;border:1px solid transparent;background:transparent;padding:4px 8px;border-radius:6px;}
+  input.name-input:disabled{cursor:default;-webkit-text-fill-color:var(--navy);opacity:1;}
+  textarea.desc-input{width:100%;min-height:38px;resize:vertical;font-family:inherit;color:var(--text-2);font-size:13.5px;border:1px solid transparent;background:transparent;padding:4px 8px;border-radius:6px;line-height:1.5;}
+  textarea.desc-input:disabled{cursor:default;-webkit-text-fill-color:var(--text-2);opacity:1;resize:none;overflow:hidden;}
+  body.edit-mode input.name-input:not(:disabled),body.edit-mode textarea.desc-input:not(:disabled){border-color:var(--border-strong);background:#fff;}
+  body.edit-mode input.name-input:not(:disabled):focus,body.edit-mode textarea.desc-input:not(:disabled):focus{border-color:var(--turq);outline:none;}
+  .add-row-bar{display:none;padding:16px 24px;border-top:1px solid var(--border);background:#F8FAFC;}
+  body.edit-mode .add-row-bar{display:flex;}
+  .add-fn-btn{font-size:13px;font-weight:600;color:var(--turq-dark);background:#fff;border:1.5px dashed var(--border-strong);border-radius:var(--radius-sm);padding:8px 16px;cursor:pointer;transition:all 180ms ease-out;}
+  .add-fn-btn:hover{background:var(--turq-light);border-color:var(--turq);}
+  .module-actions-edit{display:none;align-items:center;gap:8px;margin-left:8px;}
+  body.edit-mode .module-actions-edit{display:flex;}
+  .module-delete-btn{width:30px;height:30px;border-radius:var(--radius-sm);border:1px solid var(--border-strong);background:#fff;color:var(--crit-fg);align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all 180ms ease-out;}
+  .module-delete-btn:hover{background:var(--crit-bg);border-color:var(--crit-bd);}
+  .add-module-bar{display:none;justify-content:center;padding:16px 0 32px;}
+  body.edit-mode .add-module-bar{display:flex;}
+  .add-module-btn{font-size:14px;font-weight:600;color:var(--navy);background:#fff;border:2px dashed var(--border-strong);border-radius:var(--radius);padding:16px 24px;cursor:pointer;width:100%;transition:all 180ms ease-out;}
+  .add-module-btn:hover{border-color:var(--turq);color:var(--turq-dark);background:var(--turq-light);}
+  
+  /* Pop-up Detail Modal (Enterprise SaaS Grade) */
+  .overlay{position:fixed;inset:0;background:rgba(15,23,42,.65);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity 180ms ease-out;z-index:50;}
+  .overlay.show{opacity:1;pointer-events:auto;}
+  .detail-panel{position:fixed;top:50%;left:50%;transform:translate(-50%,-46%) scale(.96);width:94%;max-width:900px;max-height:92vh;background:#fff;border-radius:24px;box-shadow:0 24px 70px rgba(15,23,42,.25);opacity:0;pointer-events:none;transition:all 200ms cubic-bezier(.16,1,.3,1);z-index:51;padding:32px;overflow-y:auto;box-sizing:border-box;}
+  .detail-panel.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1);}
+  .detail-panel .close-btn{position:absolute;top:24px;right:24px;width:36px;height:36px;border-radius:var(--radius-sm);border:1px solid var(--border-strong);background:#fff;cursor:pointer;font-size:16px;color:var(--text-2);display:flex;align-items:center;justify-content:center;transition:all 180ms ease-out;}
+  .detail-panel .close-btn:hover{background:#F1F5F9;color:var(--navy);border-color:var(--navy);}
+  .detail-panel h3{margin:4px 40px 8px 0;font-size:24px;font-weight:700;color:var(--navy);letter-spacing:-.015em;}
+  .detail-panel .d-module{font-size:12px;color:var(--turq-dark);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+  
+  /* Detail Image Area */
+  .detail-img-wrap{position:relative;margin:24px 0 16px;border-radius:var(--radius);overflow:hidden;border:2px dashed var(--border-strong);min-height:260px;max-height:480px;background:linear-gradient(135deg,#F8FAFC 0%,#F1F5F9 100%);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 180ms ease-out;}
+  .detail-img-wrap:hover{border-color:var(--turq);box-shadow:0 6px 20px rgba(14,165,233,.12);}
+  .detail-img-wrap img{width:100%;max-height:480px;display:block;object-fit:contain;background:#0F172A;border-radius:var(--radius);}
+  .detail-img-placeholder{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--text-2);font-size:14.5px;padding:48px 24px;text-align:center;}
+  .detail-img-placeholder .ph-icon{font-size:54px;}
+  .detail-img-overlay{position:absolute;inset:0;background:rgba(15,23,42,.65);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:700;gap:8px;opacity:0;transition:opacity 180ms ease-out;}
+  .detail-img-wrap:hover .detail-img-overlay{opacity:1;}
+  
+  /* Detail Save Bar */
+  .detail-save-bar{display:none;gap:16px;margin:16px 0 24px;padding:16px 24px;background:#F0FDF4;border:1.5px solid #BBF7D0;border-radius:var(--radius);align-items:center;}
+  .detail-save-bar.visible{display:flex;}
+  .detail-save-bar .detail-save-hint{font-size:14px;color:#166534;font-weight:700;flex:1;}
+  .detail-save-bar .btn-save{padding:12px 24px;border-radius:var(--radius-sm);border:none;background:#166534;color:#fff;font-size:14.5px;font-weight:700;cursor:pointer;box-shadow:0 3px 12px rgba(22,101,52,.3);transition:all 180ms ease-out;}
+  .detail-save-bar .btn-save:hover{background:#15803D;}
+  .detail-save-bar .btn-discard{padding:12px 24px;border-radius:var(--radius-sm);border:1px solid var(--border-strong);background:#fff;color:var(--text-2);font-size:14px;font-weight:600;cursor:pointer;transition:all 180ms ease-out;}
+  .detail-save-bar .btn-discard:hover{background:#F1F5F9;}
+  
+  /* Vertical Scrollable Field Cards */
+  .detail-fields-list{display:flex;flex-direction:column;gap:16px;margin-top:24px;}
+  .detail-field-card{background:#F8FAFC;border:1px solid var(--border);border-radius:var(--radius);padding:16px 24px;}
+  .detail-field-card .fl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--text-3);margin-bottom:8px;font-weight:700;}
+  .detail-field-card .fv{font-size:14.5px;color:var(--text);line-height:1.6;white-space:pre-wrap;}
+  .detail-fields-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  
+  /* Micro Interaction Toast Notifications */
+  .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(24px);background:var(--navy);color:#fff;padding:12px 24px;border-radius:var(--radius-sm);font-size:13.5px;font-weight:600;opacity:0;pointer-events:none;transition:all 180ms cubic-bezier(.16,1,.3,1);z-index:60;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(15,23,42,.25);}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  .toast .dot{width:8px;height:8px;border-radius:50%;background:var(--turq);}
+  
+  /* Lightbox Component */
+  .lightbox{position:fixed;inset:0;background:rgba(15,23,42,.85);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;z-index:70;opacity:0;pointer-events:none;transition:opacity 180ms ease-out;}
+  .lightbox.show{opacity:1;pointer-events:auto;}
+  .lightbox-inner{background:#fff;border-radius:24px;padding:32px 48px;display:flex;flex-direction:column;align-items:center;gap:16px;max-width:740px;width:92%;box-shadow:0 24px 70px rgba(0,0,0,.3);}
+  .lightbox-inner .title{font-size:17px;font-weight:700;color:var(--navy);}
+  .lightbox-inner .note{font-size:13.5px;color:var(--text-2);text-align:center;}
+  .lightbox-close{margin-top:8px;padding:10px 24px;border-radius:var(--radius-sm);border:1px solid var(--border-strong);background:#fff;cursor:pointer;font-size:13.5px;font-weight:600;color:var(--navy);transition:all 180ms ease-out;}
+  .lightbox-close:hover{background:#F1F5F9;}
+  .empty-state{padding:64px 24px;text-align:center;color:var(--text-3);font-size:14px;font-weight:500;}
+  
+  /* RESPONSIVE DESIGN BREAKPOINTS */
+  @media print{.controls,.topbar .btn,.detail-panel,.overlay,.toast,.lightbox,.icon-btn,.drag-handle-row,.module-drag-handle{display:none !important;}.module{break-inside:avoid;box-shadow:none;border:1px solid #ccc;}.module-body{display:block !important;}body{padding-bottom:0;}select{-webkit-appearance:none;}}
+  @media (max-width:1024px){
+    .stats-grid{grid-template-columns:repeat(3,1fr);gap:16px;}
+  }
+  @media (max-width:768px){
+    .topbar{padding:24px 16px;}
+    .topbar h1{font-size:20px;}
+    .topbar p.sub{font-size:13px;}
+    .stats-bar,.controls,.modules,.add-module-bar{padding:0 16px;}
+    .controls-inner{padding:16px;gap:12px;}
+    .controls-inner input[type=text],.controls-inner select{flex:1 1 100%;width:100%;}
+    .btn{flex:1 1 auto;text-align:center;justify-content:center;}
+    .module-head{padding:16px;gap:16px;flex-direction:column;}
+    .module-img{width:100%;min-height:140px;border-right:none;border-bottom:2px dashed var(--border-strong);}
+    .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;}
+    table.fn-table{min-width:780px;}
+    .detail-panel{width:95%;padding:24px 16px;border-radius:20px;max-height:94vh;}
+    .detail-panel h3{font-size:20px;}
+    .detail-img-wrap{min-height:180px;max-height:300px;margin:16px 0;}
+    .detail-fields-row{grid-template-columns:1fr;gap:12px;}
+    .detail-save-bar{flex-direction:column;align-items:stretch;gap:8px;text-align:center;}
+    .detail-save-bar .btn-save,.detail-save-bar .btn-discard{width:100%;}
+  }
+  @media (max-width:520px){
+    .stats-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+    .stat-card{padding:16px 8px;}
+    .stat-card .num{font-size:28px;}
+    .stat-card .lbl{font-size:11.5px;}
+    .badge{font-size:10.5px;padding:4px 8px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>Spor Tesisleri Şube Müdürlüğü</h1>
+  <p class="sub">TYS ve SUY sistem modüllerinin kapsamı, kullanım amacı ve iş önceliği</p>
+</div>
+
+<div class="stats-bar">
+  <div class="stats-grid" id="statsGrid"></div>
+</div>
+
+<div class="controls">
+  <div class="controls-inner">
+    <input type="text" id="searchInput" placeholder="Alt modül adı veya açıklamada ara...">
+    <select id="moduleFilter"></select>
+    <select id="importanceFilter">
+      <option value="all">Tüm önem dereceleri</option>
+      <option value="Kritik">Kritik</option>
+      <option value="Yüksek">Yüksek</option>
+      <option value="Orta">Orta</option>
+      <option value="Düşük">Düşük</option>
+    </select>
+    <button class="btn" id="criticalOnlyBtn">Yalnızca kritik</button>
+    <div class="spacer"></div>
+    <button class="btn save-btn" id="saveBtn">💾 Kaydet</button>
+    <button class="btn" id="expandAllBtn">Tümünü genişlet</button>
+    <button class="btn" id="exportCsvBtn">Excel'e aktar</button>
+    <button class="btn" id="printBtn">PDF oluştur</button>
+    <button class="btn edit-toggle" id="editModeBtn">Düzenleme modunu aç</button>
+  </div>
+</div>
+
+<div class="modules" id="modulesContainer"></div>
+<div class="controls">
+  <div class="add-module-bar">
+    <button class="add-module-btn" id="addModuleBtn">+ Yeni modül ekle</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<div class="detail-panel" id="detailPanel">
+  <button class="close-btn" id="detailClose" title="Kapat (Esc)">✕</button>
+  <div class="d-module" id="dModule"></div>
+  <h3 id="dName"></h3>
+
+  <div class="detail-img-wrap" id="detailImgWrap" title="Resim yüklemek veya değiştirmek için tıklayın">
+    <div class="detail-img-placeholder" id="detailImgPlaceholder">
+      <span class="ph-icon">🖼️</span>
+      <span>Resim yüklemek veya değiştirmek için buraya tıklayın</span>
+    </div>
+    <img id="detailImgEl" src="" alt="" style="display:none;">
+    <div class="detail-img-overlay">📷 Yeni Resim Yükle / Değiştir</div>
+  </div>
+  <input type="file" accept="image/*" id="detailImgInput" style="display:none;">
+
+  <div class="detail-save-bar" id="detailSaveBar">
+    <span class="detail-save-hint">✨ Yeni resim seçildi. Beğendiyseniz kaydedin:</span>
+    <button class="btn-save" id="detailSaveBtn">💾 Resmi Kaydet</button>
+    <button class="btn-discard" id="detailDiscardBtn">İptal</button>
+  </div>
+
+  <div class="detail-fields-list">
+    <div class="detail-field-card">
+      <div class="fl">📝 Kısa Açıklama</div>
+      <div class="fv" id="dDesc"></div>
+    </div>
+
+    <div class="detail-fields-row">
+      <div class="detail-field-card">
+        <div class="fl">⚠️ Önem Derecesi</div>
+        <div class="fv" id="dImp"></div>
+      </div>
+      <div class="detail-field-card">
+        <div class="fl">📌 Kullanım Durumu</div>
+        <div class="fv" id="dStatus"></div>
+      </div>
+    </div>
+
+    <div class="detail-field-card">
+      <div class="fl">💬 Yönetici Notu</div>
+      <div class="fv" id="dNote"></div>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <div class="title" id="lbTitle">Ekran görüntüsü</div>
+    <div class="note" id="lbNote">Bu modül için henüz bir ekran görüntüsü yüklenmedi.</div>
+    <button class="lightbox-close" id="lbClose">Kapat</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span class="dot"></span><span id="toastMsg">Kaydedildi</span></div>
+
+<script>
+const IMP_ORDER=["Kritik","Yüksek","Orta","Düşük"];
+const STATUS_OPTIONS=["Aktif","Pasif","Eski Ekran","Yeni Sürüm","İncelenecek","Birleştirilebilir"];
+const STORAGE_KEY="tys_modul_data_v5";
+
+const DEFAULT_DATA=[
+  {id:"tanimlar",name:"Tanımlar Modülü",icon:"ℹ️",desc:"Tesis, salon, kurum, indirim, devamsızlık ve genel sistem tanımlamalarının yönetildiği TYS modüldür.",image:"",
+   functions:[
+    {name:"Belge Onaylama",desc:"Sisteme yüklenen belgelerin onaylama ve kontrol kriterlerinin tanımlanmasını sağlar.",imp:"Yüksek"},
+    {name:"Bildirim Gönder",desc:"Sistem içi ve harici kullanıcılara otomatik bildirim ve duyuru tanımlarının yapılmasını sağlar.",imp:"Orta"},
+    {name:"Devamsızlık Mazeret",desc:"Üyeler için geçerli devamsızlık mazeret türlerinin ve kurallarının tanımlanmasını sağlar.",imp:"Orta"},
+    {name:"Dolap",desc:"Tesislerde yer alan kiralık ve genel dolapların numara, bölge ve durum tanımlamalarını yönetir.",imp:"Orta"},
+    {name:"Duyuru Düzenle",desc:"Sistem geneli ve panel bazlı duyuru metinlerinin ve şablonlarının düzenlenmesini sağlar.",imp:"Orta"},
+    {name:"İndirim",desc:"Farklı üye grupları ve kampanyalar için uygulanacak indirim oran ve tanımlarının yönetilmesini sağlar.",imp:"Yüksek"},
+    {name:"İşlem",desc:"Sistemde gerçekleştirilen operasyonel işlem türlerinin tanımlanması ve kategorize edilmesini sağlar.",imp:"Orta"},
+    {name:"Kurum",desc:"Anlaşmalı kamu, özel kurum ve şirket tanımlamalarının sisteme eklenmesini ve yönetilmesini sağlar.",imp:"Yüksek"},
+    {name:"Masa",desc:"Tesis bünyesindeki masa ve alan tahsis alanlarının tanımlanmasını sağlar.",imp:"Düşük"},
+    {name:"Oda",desc:"Tesis içerisindeki oda, çalışma alanı ve özel bölümlerin tanımlanmasını ve takibini sağlar.",imp:"Orta"},
+    {name:"Öteleme",desc:"Sistemsel bazda geçerli öteleme mazeret ve kural tanımlamalarının yapılandırılmasını sağlar.",imp:"Yüksek"},
+    {name:"Özel Uyarı",desc:"Kullanıcı veya üye bazlı gösterilecek özel uyarı mesajı parametrelerinin tanımlanmasını sağlar.",imp:"Orta"},
+    {name:"Program",desc:"Spor ve etkinlik program şablonlarının sisteme tanımlanmasını ve yönetilmesini sağlar.",imp:"Yüksek"},
+    {name:"Sağlık Kurum",desc:"Anlaşmalı sağlık kurumları ve rapor kabul eden tesislerin tanımlanmasını sağlar.",imp:"Orta"},
+    {name:"Saha Etkinlikleri",desc:"Açık alan ve saha etkinliklerinin tür, alan ve kural tanımlamalarının yapılmasını sağlar.",imp:"Orta"},
+    {name:"Salon",desc:"Tesis bünyesindeki salonların (fitness, stüdyo vb.) tanımlanması ve yönetilmesini sağlar.",imp:"Kritik"},
+    {name:"Salon Büyüklük",desc:"Salonların alan (m²), kapasite ve büyüklük kategorilerinin tanımlanmasını sağlar.",imp:"Düşük"},
+    {name:"Salon Tür",desc:"Farklı kullanım amaçlarına uygun salon türlerinin ve kategorilerinin tanımlanmasını sağlar.",imp:"Orta"},
+    {name:"Satış Çizelge Gösterim",desc:"Satış ve paket çizelgelerinin görüntülenme parametrelerinin yapılandırılmasını sağlar.",imp:"Orta"},
+    {name:"Satis Dakika",desc:"Satış ve seans sürelerinin dakika bazlı opsiyonlarının ve limitlerinin tanımlanmasını sağlar.",imp:"Orta"},
+    {name:"Sıra Süre Ekleme",desc:"Hizmet sıralarında bekleme ve ek süre tanımlamalarının yapılmasını sağlar.",imp:"Orta"},
+    {name:"Tesis",desc:"Sistemde yer alan tüm spor tesisi ve komplekslerin genel bilgilerinin tanımlanmasını sağlar.",imp:"Kritik"},
+    {name:"Tesis Branş Belge",desc:"Tesis ve branş bazında üyelerden talep edilen zorunlu belge türlerinin tanımlanmasını sağlar.",imp:"Yüksek"},
+    {name:"Tesis RFID",desc:"Tesis giriş-çıkış noktalarında kullanılan RFID cihaz ve geçiş noktalarının tanımlanmasını sağlar.",imp:"Yüksek"},
+    {name:"Toplu Program",desc:"Birden fazla branş veya tesis için toplu program şablonlarının oluşturulmasını sağlar.",imp:"Orta"},
+    {name:"Üye Yaş Üstü",desc:"Kullanım hakkı ve paketler için üst yaş sınırı kurallarının tanımlanmasını sağlar.",imp:"Orta"}
+  ]},
+  {id:"protokol_satis",name:"Protokol Satış Modülü",icon:"✈️",desc:"Kurumsal protokoller, BESYO, ESH, ÖSH ve özel statüdeki üyelik satış süreçlerinin yönetildiği modüldür.",image:"",
+   functions:[
+    {name:"Protokol Ücretsiz",desc:"Ücretsiz protokol kapsamındaki üyelik ve hizmet tanımlarının satış işlemlerini yönetir.",imp:"Yüksek"},
+    {name:"Protokol BESYO",desc:"BESYO öğrencileri ve eğitmenleri için belirlenen özel protokol satışlarını yönetir.",imp:"Yüksek"},
+    {name:"Protokol ESH",desc:"Engelli Spor Hizmetleri (ESH) protokolüne tabi üye satış operasyonlarını yönetir.",imp:"Kritik"},
+    {name:"Protokol ÖSH",desc:"Özel Spor Hizmetleri (ÖSH) protokolü çerçevesinde gerçekleşen satış işlemlerini yönetir.",imp:"Kritik"},
+    {name:"Protokol Ücretli",desc:"İndirimli veya özel şartlı ücretli kurumsal protokol satışlarının takibini sağlar.",imp:"Kritik"}
+  ]},
+  {id:"seans",name:"Seans Modülü",icon:"📅",desc:"Seans takvimleri, seans ücretleri, günlük yoklama ve toplu seans operasyonlarının yönetildiği modüldür.",image:"",
+   functions:[
+    {name:"Günlük Yoklama Listesi",desc:"Günlük olarak gerçekleşen tüm seansların katılım ve yoklama listelerinin takibini sağlar.",imp:"Kritik"},
+    {name:"Satış Günü",desc:"Seans satışlarına açılacak günlerin ve tarih aralıklarının tanımlanmasını sağlar.",imp:"Yüksek"},
+    {name:"Seans",desc:"Bireysel ve grup seanslarının oluşturulması, saatlerinin ve kapasitelerinin belirlenmesini sağlar.",imp:"Kritik"},
+    {name:"Seans Seans",desc:"Detaylı seans içi saat periyotlarının ve seans çakışma kontrollerinin yönetilmesini sağlar.",imp:"Orta"},
+    {name:"Seans Ücret",desc:"Farklı branş ve seans türleri için geçerli birim ücretlerin tanımlanmasını sağlar.",imp:"Kritik"},
+    {name:"Toplu Seans",desc:"Belirli tarih aralıkları için birden fazla seansın toplu olarak tanımlanmasını ve açılmasını sağlar.",imp:"Yüksek"},
+    {name:"Zaman Türü",desc:"Seanslarda geçerli zaman aralığı (dk/saat) ve zaman dilimi türlerinin yapılandırılmasını sağlar.",imp:"Orta"}
+  ]},
+  {id:"satis",name:"Satış ve Operasyon Modülü",icon:"⚓",desc:"Üyelik, paket, ek hizmet, satış sonrası düzenleme ve operasyonel işlem süreçlerinin yönetildiği modüldür.",image:"",
+   functions:[
+    {name:"Akademi",desc:"Akademi kayıt ve ilgili operasyon süreçlerinin yönetilmesini sağlar.",imp:"Orta"},
+    {name:"BESYO",desc:"BESYO kapsamındaki kayıt, başvuru ve üyelik işlemlerinin takibini sağlar.",imp:"Orta"},
+    {name:"Devamsızlık Geri Alım",desc:"Devamsızlık nedeniyle düşürülen kullanım haklarının yetkili kullanıcı tarafından geri alınmasını sağlar.",imp:"Kritik"},
+    {name:"Dolap",desc:"Üyelere dolap tahsis edilmesi, değiştirilmesi ve dolap kullanımının takip edilmesini sağlar.",imp:"Orta"},
+    {name:"ESH Gerisi",desc:"Geçmiş ESH işlemlerinin görüntülenmesini ve gerekli düzeltmelerin yapılmasını sağlar.",imp:"Yüksek"},
+    {name:"Üyelik Paketleri",desc:"Üyelere sunulan paketlerin tanımlanmasını, güncellenmesini ve yönetilmesini sağlar.",imp:"Kritik"}
+  ]},
+  {id:"uye",name:"Üye Modülü",icon:"👤",desc:"Üyenin sisteme kaydından belge, ödeme, paket, satış, seans, spor ve sözleşme süreçlerine kadar bütün üye operasyonlarının yönetildiği ana modüldür.",image:"",
+   functions:[
+    {name:"Belgesiz Üyeler",desc:"Eksik veya tamamlanmamış belgesi bulunan üyelerin listelenmesini sağlar.",imp:"Yüksek"},
+    {name:"Hızlı Kayıt Davet",desc:"Yeni üyelere hızlı kayıt bağlantısı ve daveti gönderilmesini sağlar.",imp:"Orta"},
+    {name:"Tüm Üye Spor",desc:"Bütün üyelerin tanımlı spor ve branş kayıtlarını toplu olarak gösterir.",imp:"Orta"},
+    {name:"Üye Aktar ve Sil",desc:"Üye kayıtlarının aktarılması, birleştirilmesi veya yetkili kullanıcı tarafından silinmesini sağlar.",imp:"Kritik"},
+    {name:"Üye Ara",desc:"Üyelere kimlik, iletişim veya üye numarası bilgileriyle hızlı erişim sağlar.",imp:"Yüksek"},
+    {name:"Üye Arama Listesi",desc:"Arama ve filtreleme kriterlerine uyan üyeleri liste halinde gösterir.",imp:"Yüksek"},
+    {name:"Üye Arama Listesi V2",desc:"Üye arama ekranının geliştirilmiş yeni sürümüdür.",imp:"Orta"},
+    {name:"Üye Belge Rapor",desc:"Üyelere ait eksik, onaylı ve geçerliliği sona yaklaşan belgeleri raporlar.",imp:"Yüksek"},
+    {name:"Üye Belgeleri",desc:"Seçilen üyeye ait bütün belge ve dosyaların yönetilmesini sağlar.",imp:"Yüksek"},
+    {name:"Üye Durum Düzenle",desc:"Üyenin aktif, pasif veya diğer üyelik durumlarının değiştirilmesini sağlar.",imp:"Kritik"},
+    {name:"Üye Ekle",desc:"Yeni bir üyenin kişisel ve üyelik bilgileriyle sisteme kaydedilmesini sağlar.",imp:"Kritik"},
+    {name:"Üye HES Kodu",desc:"Üyelere ait geçmiş dönem HES kodu kayıtlarının görüntülenmesini sağlar.",imp:"Düşük"},
+    {name:"Üye Kart",desc:"Üyenin paket, ödeme, belge, seans ve iletişim bilgilerinin tek profilde gösterilmesini sağlar.",imp:"Kritik"},
+    {name:"Üye Kiralık Öteleme",desc:"Kiralık hizmetlerin kullanım tarihlerinin ileri bir tarihe ötelenmesini sağlar.",imp:"Yüksek"},
+    {name:"Üye Ödeme",desc:"Üyeye ait ödeme, tahsilat ve kalan borç işlemlerinin yönetilmesini sağlar.",imp:"Kritik"},
+    {name:"Üye Özel Öteleme",desc:"Standart kurallar dışındaki özel paket veya üyelik ötelemelerini yönetir.",imp:"Yüksek"},
+    {name:"Üye Paket Düzenle",desc:"Üyenin paket süresi, kullanım hakkı ve paket bilgilerinin değiştirilmesini sağlar.",imp:"Kritik"},
+    {name:"Üye PAR-Q Test",desc:"Üyenin fiziksel aktiviteye uygunluk formunun kayıt altına alınmasını sağlar.",imp:"Yüksek"},
+    {name:"Üye Plaka",desc:"Üyelere ait araç ve plaka bilgilerinin yönetilmesini sağlar.",imp:"Düşük"},
+    {name:"Üye Puan",desc:"Üyenin kazandığı ve kullandığı puanların takip edilmesini sağlar.",imp:"Orta"},
+    {name:"Üye Satış",desc:"Üyeye paket, ürün veya hizmet satışı yapılmasını sağlar.",imp:"Kritik"},
+    {name:"Üye Satış İşlem",desc:"Üyeye ait tamamlanan, bekleyen veya iptal edilen satış işlemlerini gösterir.",imp:"Kritik"},
+    {name:"Üye Seans Seviye",desc:"Üyenin branş veya seans seviyesinin tanımlanmasını ve güncellenmesini sağlar.",imp:"Orta"},
+    {name:"Üye Seans Tüm Liste",desc:"Üyenin geçmiş ve gelecek bütün seans kayıtlarını gösterir.",imp:"Yüksek"},
+    {name:"Üye SEDEP",desc:"Üyeye ait SEDEP kapsamındaki kayıtların ve durum bilgilerinin yönetilmesini sağlar.",imp:"Orta"},
+    {name:"Üye Sepet Rapor",desc:"Üyelerin sepet ve satışa dönüşen işlem hareketlerini raporlar.",imp:"Orta"},
+    {name:"Üye Sepet Rapor Yeni",desc:"Sepet hareketlerinin geliştirilmiş raporlama ekranıdır.",imp:"Orta"},
+    {name:"Üye Sıra",desc:"Üyelerin işlem ve hizmet bekleme sıralarının yönetilmesini sağlar.",imp:"Orta"},
+    {name:"Üye SMS Listesi",desc:"Üyelere gönderilen SMS kayıtlarını ve gönderim durumlarını gösterir.",imp:"Orta"},
+    {name:"Üye SO Sepet Rapor",desc:"SO kapsamındaki üye sepet ve işlem kayıtlarını raporlar.",imp:"Orta"},
+    {name:"Üye Sözleşme",desc:"Üyeye ait sözleşmelerin oluşturulmasını, görüntülenmesini ve takip edilmesini sağlar.",imp:"Kritik"},
+    {name:"Üye Spor",desc:"Seçilen üyeye tanımlanan spor, branş ve programların yönetilmesini sağlar.",imp:"Yüksek"},
+    {name:"Üye Yaş",desc:"Üyelerin yaş ve yaş gruplarına göre listelenmesini sağlar.",imp:"Düşük"}
+  ]},
+  {id:"yonetim",name:"Yönetim Modülü",icon:"⚙️",desc:"Kullanıcı, rol, tesis, branş ve sistem kurallarının merkezi olarak yapılandırıldığı yetkilendirme ve yönetim modülüdür.",image:"",
+   functions:[
+    {name:"Devamsızlık Ayarları",desc:"Devamsızlık, geç iptal, hak düşümü ve bildirim kurallarının tanımlanmasını sağlar.",imp:"Yüksek"},
+    {name:"Kullanıcı",desc:"Sistemi kullanacak personel ve yönetici hesaplarının oluşturulmasını sağlar.",imp:"Kritik"},
+    {name:"Kullanıcı Tesis",desc:"Kullanıcıların erişebileceği tesislerin belirlenmesini sağlar.",imp:"Kritik"},
+    {name:"Kullanıcı Tesis Branş",desc:"Kullanıcıların tesis ve branş bazındaki işlem yetkilerini belirler.",imp:"Kritik"},
+    {name:"Rol",desc:"Kullanıcı rollerinin ve ekran bazlı erişim yetkilerinin yönetilmesini sağlar.",imp:"Kritik"}
+  ]},
+  {id:"sms",name:"SMS Modülü",icon:"💬",desc:"Toplu SMS gönderim operasyonlarının ve duyuru şablonlarının yönetildiği modüldür.",image:"",
+   functions:[
+    {name:"Toplu SMS Gönder",desc:"Üyelere veya belirli gruplara bildirim, hatırlatma ve kampanya amaçlı toplu SMS gönderilmesini sağlar.",imp:"Kritik"}
+  ]},
+  {id:"raporlar_modulu",name:"Raporlar Modülü",icon:"📊",desc:"Tesis kullanımı, aktif üyeler, seans durumları, kurum işlemleri ve etkinliklerin detaylı raporlandığı modüldür.",image:"",
+   functions:[
+    {name:"Aktif Üye İletişim",desc:"Aktif durumdaki tüm üyelerin iletişim bilgilerini ve bildirim tercihlerini raporlar.",imp:"Yüksek"},
+    {name:"Aktif Üye Raporu",desc:"Tesis, branş ve paket bazında aktif üyelerin güncel sayılarını ve dağılımını raporlar.",imp:"Kritik"},
+    {name:"Belge Kurum Raporu",desc:"Kurum bazlı üyelerin belge eksikliklerini ve onay durumlarını raporlar.",imp:"Orta"},
+    {name:"Branş Bazlı Aktif Üye",desc:"Farklı spor branşlarını kullanan aktif üyeliklerin dökümünü ve oranlarını raporlar.",imp:"Yüksek"},
+    {name:"Genel Sıra",desc:"Tesis ve hizmet bazında sıra bekleyen ve işlem gören üyelerin genel durumunu raporlar.",imp:"Orta"},
+    {name:"Hakediş Özet Raporu",desc:"Eğitmen ve personel hakedişlerinin özet tablolar halinde raporlanmasını sağlar.",imp:"Kritik"},
+    {name:"İstanbul Senin Rapor",desc:"İstanbul Senin uygulaması üzerinden gelen üye ve kullanım verilerinin raporlanmasını sağlar.",imp:"Yüksek"},
+    {name:"Kullanıcı Belge Takip",desc:"Kullanıcıların üyeler için yüklediği veya onayladığı belgelerin takip raporudur.",imp:"Orta"},
+    {name:"Kullanım Raporu",desc:"Tesislerin saatlik, günlük ve haftalık genel kullanım yoğunluğunu raporlar.",imp:"Kritik"},
+    {name:"Kurum Belge Raporu",desc:"Anlaşmalı kurumlar bazında teslim edilen belgelerin geçerlilik ve durum raporudur.",imp:"Orta"},
+    {name:"Kurum Ziyareti",desc:"Kurum temsilcileri ve toplu üyelik ziyaret hareketlerinin raporlanmasını sağlar.",imp:"Orta"},
+    {name:"Ödeme Raporu",desc:"Tüm ödeme yöntemleri (kredi kartı, nakit, havale) bazında gerçekleşen tahsilat raporudur.",imp:"Kritik"},
+    {name:"Ödeme Raporu Paket",desc:"Satılan üyelik paketleri bazında ödeme ve gelir dağılımını raporlar.",imp:"Yüksek"},
+    {name:"Protokol Ödeme Raporu",desc:"Protokol satışlarından elde edilen gelir ve muafiyetlerin dökümünü raporlar.",imp:"Yüksek"},
+    {name:"Rezervasyon İşlemleri",desc:"Üyelerin seans ve saha rezervasyon hareketlerini ve iptallerini raporlar.",imp:"Yüksek"},
+    {name:"Saha Etkinlikleri Kayıt",desc:"Açık saha ve dış etkinlik kayıtlarının katılımcı bazlı dökümünü verir.",imp:"Orta"},
+    {name:"Seans Durumları",desc:"Planlanan seansların doluluk, iptal ve gerçekleşme durumlarını raporlar.",imp:"Yüksek"},
+    {name:"Seans Hafta Sıra",desc:"Haftalık seans bazında oluşan sıra ve katılım yoğunluğunu raporlar.",imp:"Orta"},
+    {name:"Seans Türü Doluluk",desc:"Seans türlerine (grup, özel vb.) göre kapasite kullanım oranlarını raporlar.",imp:"Yüksek"},
+    {name:"Sıra Özet Raporu",desc:"Hizmet sıralarında bekleyen üyelerin ortalama bekleme ve işlem sürelerini raporlar.",imp:"Orta"},
+    {name:"Sömestr Etkinlikleri",desc:"Sömestr döneminde düzenlenen özel kurs ve etkinliklerin katılım raporudur.",imp:"Orta"},
+    {name:"Tesis - Eğitmen Raporu",desc:"Eğitmenlerin tesis bazlı verdikleri ders sayılarını ve üye katılımlarını raporlar.",imp:"Yüksek"},
+    {name:"Tesis Anlık Kullanım",desc:"Tesislerde anlık olarak bulunan üye sayılarını turnike geçiş verileriyle gösterir.",imp:"Kritik"},
+    {name:"Tesis Kimlik",desc:"Tesis kartı ve kimlik doğrulama verilerinin kullanım raporudur.",imp:"Düşük"},
+    {name:"Tesis Sıra Toplu",desc:"Tüm tesis genelinde toplu olarak sıra bekleyen üye durumlarını raporlar.",imp:"Orta"},
+    {name:"Tesis Üye Sıra",desc:"Belirli bir tesisteki branş ve üye sıra takip verilerini raporlar.",imp:"Orta"},
+    {name:"Üye Arama Raporu",desc:"Üye arama sorguları ve arama sonuç verilerinin analiz raporudur.",imp:"Düşük"},
+    {name:"Üye Paket",desc:"Üyelerde tanımlı aktif, süresi dolmuş veya dondurulmuş paketlerin dağılım raporudur.",imp:"Yüksek"},
+    {name:"Üye Sayıları Raporu",desc:"Dönemlik üye artış, ayrılış ve toplam üye sayısı istatistiklerini raporlar.",imp:"Kritik"},
+    {name:"Yasaklı Üyeler",desc:"Kuralları ihlal ettiği için sisteme girişi yasaklanan veya askıya alınan üyeleri raporlar.",imp:"Yüksek"},
+    {name:"Yaz Spor Okulu Kayıtlı",desc:"Yaz spor okullarına kayıt yaptıran öğrencilerin ve branşların döküm raporudur.",imp:"Orta"},
+    {name:"Yaz Spor Okulu Sıra",desc:"Yaz spor okulu branşlarında oluşan yedek ve başvuru sırası raporudur.",imp:"Orta"},
+    {name:"Yoklama Listesi",desc:"Seans ve derslere katılan üyelerin yoklama ve imza durumlarını raporlar.",imp:"Kritik"}
+  ]},
+  {id:"tesis_buyuk_rapor",name:"Tesis Büyük Rapor Modülü",icon:"📊",desc:"Tesis bazlı ödeme ve kullanım hakları seçim raporlarının sunulduğu modüldür.",image:"",
+   functions:[
+    {name:"Aylık Ödeme Raporu",desc:"Tesis bazında aylık gerçekleşen ödeme ve tahsilat hareketlerini raporlar.",imp:"Kritik"},
+    {name:"Hak Seçim Raporu",desc:"Üyelere tanımlanan ve seçilen kullanım haklarının tesis bazlı raporlanmasını sağlar.",imp:"Yüksek"}
+  ]},
+  {id:"raporlar",name:"Büyük Raporlar Modülü",icon:"📈",desc:"Kullanım, ödeme, seans, hakediş ve üye iletişim verilerinin üst yönetim tarafından analiz edilmesini sağlayan kurumsal raporlama modülüdür.",image:"",
+   functions:[
+    {name:"Aylık Kullanım",desc:"Aylık kullanım sayılarını tesis ve branş bazında karşılaştırmalı olarak gösterir.",imp:"Yüksek"},
+    {name:"Büyük Ödeme Belge",desc:"Ödeme işlemlerine ait belge kayıtlarının toplu kontrolünü sağlar.",imp:"Yüksek"},
+    {name:"Büyük Ödeme Özet",desc:"Ödeme ve tahsilat verilerinin üst yönetim için özet icmal tablosunu raporlar.",imp:"Kritik"},
+    {name:"Büyük Ödeme Raporu",desc:"Tahsilat, ödeme yöntemi, kalan borç ve tesis gelirlerini raporlar.",imp:"Kritik"},
+    {name:"Günlük Seans",desc:"Gün içinde gerçekleşen ve planlanan seansların özetini gösterir.",imp:"Yüksek"},
+    {name:"Günlük Seans Detay",desc:"Seansların tesis, branş, eğitmen, katılım ve kapasite detaylarını gösterir.",imp:"Yüksek"},
+    {name:"Hak Karşılaştırma",desc:"Tanımlanan, kullanılan ve kalan üyelik haklarını karşılaştırır.",imp:"Yüksek"},
+    {name:"Hak Seçim",desc:"Üye, paket ve seans bazında kullanılabilecek hakların seçilmesini sağlar.",imp:"Yüksek"},
+    {name:"Hakediş Günlük Sayım",desc:"Eğitmenlerin günlük seans ve katılımcı sayılarına göre hakedişlerini hesaplar.",imp:"Kritik"},
+    {name:"Hakediş Raporu",desc:"Eğitmen hakedişlerini dönem, tesis ve branş bazında raporlar.",imp:"Kritik"},
+    {name:"Seans Detay",desc:"Seansların saat, kapasite, eğitmen, üye katılımı ve durum bilgilerini gösterir.",imp:"Yüksek"},
+    {name:"Seans Saat",desc:"Seans ve katılım yoğunluğunu saat aralıklarına göre analiz eder.",imp:"Orta"},
+    {name:"Tekil Üye Kullanım",desc:"Seçilen bir üyenin tesis, seans ve kullanım geçmişini gösterir.",imp:"Yüksek"},
+    {name:"Üye İletişim",desc:"Üyelerle yapılan SMS, telefon ve e-posta iletişimlerini takip eder.",imp:"Orta"},
+    {name:"Yıllık Kullanım",desc:"Yıllık kullanım eğilimlerini ay, tesis ve branş bazında karşılaştırır.",imp:"Yüksek"}
+  ]},
+  /* ======== SUY (SPOR OKULU YÖNETİMİ) MODÜLLERİ ======== */
+  {id:"suy_tanimlar",name:"Suy - Tanımlar Modülü",icon:"ℹ️",desc:"Belge, bilet, branş, etkinlik, indirim, öteleme ve paket tanımlamalarının yönetildiği Spor Okulları Yönetim (SUY) modülüdür.",image:"",
+   functions:[
+    {name:"Belge",desc:"SUY kapsamındaki zorunlu belge ve evrak tanımlamalarını yönetir.",imp:"Yüksek"},
+    {name:"Bilet",desc:"Spor okulu etkinlik ve organizasyon bilet tanımlamalarını yönetir.",imp:"Orta"},
+    {name:"Brans",desc:"Spor okullarında verilen spor branşlarının tanımlanmasını sağlar.",imp:"Kritik"},
+    {name:"Dönemsel Etkinlik",desc:"Sezonluk ve dönemsel spor okulu etkinliklerinin tanımlanmasını sağlar.",imp:"Yüksek"},
+    {name:"Etkinlik",desc:"Spor okulu bünyesinde düzenlenen genel etkinliklerin tanımlanmasını sağlar.",imp:"Orta"},
+    {name:"İndirim",desc:"SUY kapsamında uygulanacak özel indirim ve burs tanımlarını yönetir.",imp:"Yüksek"},
+    {name:"Öteleme",desc:"SUY kayıt ve ders öteleme kurallarının tanımlanmasını sağlar.",imp:"Yüksek"},
+    {name:"Paket",desc:"Spor okulu kurs ve dönem paketlerinin tanımlanmasını sağlar.",imp:"Kritik"}
+  ]},
+  {id:"suy_duyuru",name:"Suy - Duyuru Modülü",icon:"📢",desc:"SUY üye, veli ve kullanıcılarına yönelik özel uyarı ve popup duyurularının yönetildiği modüldür.",image:"",
+   functions:[
+    {name:"Özel Uyarı",desc:"SUY portalı üye ve velileri için gösterilecek özel uyarı mesajlarını yönetir.",imp:"Yüksek"},
+    {name:"PopupDuyuru",desc:"SUY giriş paneli ve mobil uygulamadaki pop-up duyuruları yönetir.",imp:"Kritik"}
+  ]},
+  {id:"suy_yonetim",name:"Suy - Yönetim Modülü",icon:"⚙️",desc:"SUY sistemi kullanıcı hesapları, sözleşme şablonları ve üye arama panellerinin yönetildiği modüldür.",image:"",
+   functions:[
+    {name:"Kullanıcı",desc:"SUY sistemini kullanacak antrenör, personel ve yönetici hesaplarını yönetir.",imp:"Kritik"},
+    {name:"Sözleşme",desc:"SUY üyelik ve veli sözleşme şablonlarının yönetilmesini sağlar.",imp:"Kritik"},
+    {name:"Üye Arama Dashboard",desc:"SUY öğrenci ve veli kayıtlarına hızlı erişim sağlayan gösterge panelidir.",imp:"Yüksek"}
+  ]},
+  {id:"suy_spor_okulu",name:"Suy - Spor Okulu Modülü",icon:"🎓",desc:"Spor okulu programları, öğrenci kayıtları, denetim, teknik değerlendirme ve karne süreçlerinin yönetildiği SUY modülüdür.",image:"",
+   functions:[
+    {name:"Denetim Düzenleme",desc:"Spor okulu ders ve antrenör denetim kayıtlarının düzenlenmesini sağlar.",imp:"Orta"},
+    {name:"Spor Okulu Program",desc:"Spor okulu yaş grupları ve branş programlarının oluşturulmasını sağlar.",imp:"Yüksek"},
+    {name:"Spor Okulu Üye Listesi",desc:"Spor okuluna kayıtlı tüm öğrencilerin ve grupların listelenmesini sağlar.",imp:"Kritik"},
+    {name:"Teknik Değerlendirme",desc:"Öğrencilerin branş bazındaki teknik gelişim ve değerlendirme puanlarının girilmesini sağlar.",imp:"Yüksek"},
+    {name:"Test-Karne Listesi",desc:"Dönem sonu gelişim testleri ve karne sonuçlarının listelenmesini sağlar.",imp:"Yüksek"}
+  ]},
+  {id:"suy_spor_okulu_raporlari",name:"Suy - Spor Okulu Raporları Modülü",icon:"📊",desc:"Spor okulu öğrencilerinin genel durum ve arşivleşmiş dönem raporlarının sunulduğu SUY modülüdür.",image:"",
+   functions:[
+    {name:"Durum Arşivli",desc:"Spor okullarına ait geçmiş dönem ve arşivlenmiş durum kayıtlarını raporlar.",imp:"Orta"},
+    {name:"Durum Raporu",desc:"Spor okullarındaki mevcut öğrencilerin anlık durum ve katılım raporunu sunar.",imp:"Yüksek"}
+  ]},
+  {id:"suy_raporlar",name:"Suy - Raporlar Modülü",icon:"📊",desc:"SUY seans detayları, antrenör hakedişleri ve aktif kullanım hakkı bulunan öğrenci raporlarının sunulduğu modüldür.",image:"",
+   functions:[
+    {name:"Aylık Günlük Seans Detay",desc:"SUY ders ve seanslarının aylık/günlük detay dökümünü raporlar.",imp:"Yüksek"},
+    {name:"Aylık Günlük Seans Detay Liste",desc:"Seans detaylarının liste formatında dışa aktarılabilir raporudur.",imp:"Orta"},
+    {name:"Aylık Hak Ediş",desc:"SUY antrenör ve eğitmenlerinin aylık hakediş hesaplama raporudur.",imp:"Kritik"},
+    {name:"Aylık Hak Ediş Günlük Kullanım",desc:"Hakedişe esas günlük ders ve yoklama kullanım detaylarını raporlar.",imp:"Yüksek"},
+    {name:"Kullanım Hakkı Olan Uye",desc:"SUY aktif kurs kullanım hakkı devam eden öğrencilerin raporudur.",imp:"Kritik"}
+  ]}
+];
+
+/* ======== LocalStorage ======== */
+function loadData(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(raw){const p=JSON.parse(raw);if(Array.isArray(p)&&p.length>0)return p;}
+  }catch(e){}
+  return JSON.parse(JSON.stringify(DEFAULT_DATA));
+}
+function saveData(){
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(DATA));
+    showToast("✅ Tüm değişiklikler kaydedildi");
+    markDirty(false);
+  }catch(e){showToast("⚠️ Kayıt başarısız");}
+}
+
+let isDirty=false;
+function markDirty(d=true){
+  isDirty=d;
+  const btn=document.getElementById("saveBtn");
+  isDirty?btn.classList.add("visible"):btn.classList.remove("visible");
+}
+
+let DATA=loadData();
+let fidCtr=0;
+DATA.forEach(m=>{
+  if(!m.image)m.image="";
+  m.functions.forEach(f=>{
+    if(!f.id)f.id="f"+(fidCtr++);
+    if(!f.status)f.status="Aktif";
+    if(!f.note)f.note="";
+    if(!f.image)f.image="";
+  });
+});
+
+const state={search:"",module:"all",importance:"all",onlyCritical:false,editMode:false};
+const modulesContainer=document.getElementById("modulesContainer");
+const statsGrid=document.getElementById("statsGrid");
+const moduleFilter=document.getElementById("moduleFilter");
+
+function allFunctions(){return DATA.flatMap(m=>m.functions);}
+function ea(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");}
+function eh(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function newFid(){return"f_"+Date.now()+"_"+Math.floor(Math.random()*1000);}
+function newMid(){return"m_"+Date.now()+"_"+Math.floor(Math.random()*1000);}
+function autoResizeTextarea(el){if(!el)return;el.style.height='auto';const minH=el.classList.contains('module-desc-input')?22:38;el.style.height=Math.max(minH,el.scrollHeight)+'px';}
+function autoResizeAllTextareas(){requestAnimationFrame(()=>{document.querySelectorAll('textarea.desc-input, textarea.module-desc-input').forEach(el=>autoResizeTextarea(el));});}
+
+function computeStats(){
+  const fns=allFunctions();
+  const c={Kritik:0,Yüksek:0,Orta:0,Düşük:0};
+  fns.forEach(f=>c[f.imp]++);
+  return{modules:DATA.length,total:fns.length,...c};
+}
+function renderStats(){
+  const s=computeStats();
+  statsGrid.innerHTML=`
+    <div class="stat-card"><div class="num">${s.modules}</div><div class="lbl"><span>📦</span> Toplam modül</div></div>
+    <div class="stat-card"><div class="num">${s.total}</div><div class="lbl"><span>⚡</span> Toplam alt modül</div></div>
+    <div class="stat-card crit"><div class="num">${s.Kritik}</div><div class="lbl"><span>🔴</span> Kritik alt modül</div></div>
+    <div class="stat-card high"><div class="num">${s.Yüksek}</div><div class="lbl"><span>🟠</span> Yüksek öncelikli</div></div>
+    <div class="stat-card mid"><div class="num">${s.Orta}</div><div class="lbl"><span>🟡</span> Orta öncelikli</div></div>
+    <div class="stat-card low"><div class="num">${s.Düşük}</div><div class="lbl"><span>🔵</span> Düşük öncelikli</div></div>`;
+}
+function populateModuleFilter(){
+  moduleFilter.innerHTML='<option value="all">Tüm modüller</option>'+DATA.map(m=>`<option value="${m.id}">${m.name}</option>`).join("");
+  moduleFilter.value=[...moduleFilter.options].some(o=>o.value===state.module)?state.module:"all";
+}
+function badgeClass(imp){return imp==="Kritik"?"crit":imp==="Yüksek"?"high":imp==="Orta"?"mid":"low";}
+function modCounts(m){const c={Kritik:0,Yüksek:0,Orta:0,Düşük:0};m.functions.forEach(f=>c[f.imp]++);return c;}
+
+function renderModules(){
+  modulesContainer.innerHTML="";
+  DATA.forEach(m=>{
+    const c=modCounts(m);
+    const sec=document.createElement("section");
+    sec.className="module";
+    sec.dataset.moduleId=m.id;
+
+    sec.innerHTML=`
+      <div class="module-head" data-role="head">
+        <span class="module-drag-handle" draggable="true" data-role="mdrag">⋮⋮</span>
+        <div class="module-img" data-role="imgbox">
+          ${m.image?`<img src="${m.image}" style="width:100%;height:100%;object-fit:cover;">`:`<span class="icon">${m.icon}</span><span class="cap">Ekran görüntüsü eklenmedi</span>`}
+          <span class="zoom-btn" data-role="zoom" title="Büyüt">🔍</span>
+          <input type="file" accept="image/*" data-role="imginput" style="display:none;">
+        </div>
+        <div class="module-info">
+          <div class="module-info-top">
+            <div style="width:100%;">
+              <input type="text" class="module-name-input" data-role="modname" value="${ea(m.name)}" ${state.editMode?"":"disabled"}>
+              <textarea class="module-desc-input" data-role="moddesc" ${state.editMode?"":"disabled"}>${eh(m.desc)}</textarea>
+            </div>
+            <div class="module-actions-edit">
+              <button class="module-delete-btn" data-role="deletemodule" title="Modülü sil">🗑</button>
+            </div>
+          </div>
+          <div class="module-badges">
+            <span class="badge total">${m.functions.length} alt modül</span>
+            <span class="badge crit">${c.Kritik} kritik</span>
+            <span class="badge high">${c.Yüksek} yüksek</span>
+            <span class="badge mid">${c.Orta} orta</span>
+            <span class="badge low">${c.Düşük} düşük</span>
+          </div>
+        </div>
+        <div class="chevron-wrap"><span class="chevron">▾</span></div>
+      </div>
+      <div class="module-body">
+        <div class="table-wrap">
+          <table class="fn-table">
+            <thead><tr>
+              <th style="width:26px;"></th>
+              <th>Alt modül ismi</th><th>Kısa açıklama</th>
+              <th>Önem derecesi</th><th>Kullanım durumu</th>
+              <th>Yönetici notu</th><th>İşlemler</th>
+            </tr></thead>
+            <tbody data-role="tbody"></tbody>
+          </table>
+        </div>
+        <div class="add-row-bar">
+          <button class="add-fn-btn" data-role="addfn">+ Yeni alt modül ekle</button>
+        </div>
+      </div>`;
+
+    const tbody=sec.querySelector('[data-role="tbody"]');
+    m.functions.forEach(f=>{
+      const tr=document.createElement("tr");
+      tr.className="fn-row";tr.dataset.fid=f.id;
+      tr.innerHTML=`
+        <td><span class="drag-handle-row" draggable="true" data-role="fdrag">⋮⋮</span></td>
+        <td class="fn-name"><input type="text" class="name-input" data-role="name" value="${ea(f.name)}" ${state.editMode?"":"disabled"}></td>
+        <td class="fn-desc"><textarea class="desc-input" data-role="desc" rows="2" ${state.editMode?"":"disabled"}>${eh(f.desc)}</textarea></td>
+        <td><select class="imp-select ${f.imp}" data-role="imp" ${state.editMode?"":"disabled"}>
+          ${IMP_ORDER.map(i=>`<option value="${i}"${i===f.imp?" selected":""}>${i}</option>`).join("")}
+        </select></td>
+        <td><select class="status-select" data-role="status" data-status="${f.status}" ${state.editMode?"":"disabled"}>
+          ${STATUS_OPTIONS.map(s=>`<option value="${s}"${s===f.status?" selected":""}>${s}</option>`).join("")}
+        </select></td>
+        <td><input type="text" class="note-input" data-role="note" placeholder="Not ekle..." value="${ea(f.note)}" ${state.editMode?"":"disabled"}></td>
+        <td><div class="row-actions">
+          <button class="icon-btn" data-role="detail" title="Detay aç">↗</button>
+          <button class="icon-btn danger" data-role="delrow" title="Alt modülü sil">🗑</button>
+        </div></td>`;
+      tbody.appendChild(tr);
+
+      tr.querySelector('[data-role="imp"]').addEventListener("change",e=>{
+        f.imp=e.target.value;e.target.className="imp-select "+f.imp;
+        renderStats();renderModuleBadges(sec,m);markDirty();
+      });
+      tr.querySelector('[data-role="status"]').addEventListener("change",e=>{
+        f.status=e.target.value;e.target.dataset.status=f.status;markDirty();
+      });
+      tr.querySelector('[data-role="note"]').addEventListener("blur",e=>{
+        if(f.note!==e.target.value){f.note=e.target.value;markDirty();}
+      });
+      tr.querySelector('[data-role="name"]').addEventListener("blur",e=>{
+        const v=e.target.value.trim();
+        if(v&&f.name!==v){f.name=v;markDirty();}else e.target.value=f.name;
+      });
+      tr.querySelector('[data-role="desc"]').addEventListener("input",e=>autoResizeTextarea(e.target));
+      tr.querySelector('[data-role="desc"]').addEventListener("blur",e=>{
+        const v=e.target.value.trim();
+        if(v&&f.desc!==v){f.desc=v;markDirty();}else e.target.value=f.desc;
+        autoResizeTextarea(e.target);
+      });
+      tr.querySelector('[data-role="delrow"]').addEventListener("click",e=>{
+        e.stopPropagation();
+        if(!state.editMode)return;
+        if(!confirm(`"${f.name}" alt modülünü silmek istediğine emin misin?`))return;
+        m.functions=m.functions.filter(x=>x.id!==f.id);
+        renderModules();renderStats();applyFilters();markDirty();
+        showToast("Alt modül silindi");
+      });
+      tr.querySelector('[data-role="detail"]').addEventListener("click",e=>{
+        e.stopPropagation();openDetail(m,f);
+      });
+      tr.addEventListener("click",e=>{
+        if(state.editMode)return;
+        if(e.target.closest('select,input,textarea,[data-role="fdrag"],[data-role="delrow"]'))return;
+        openDetail(m,f);
+      });
+      // Row drag
+      const fdrag=tr.querySelector('[data-role="fdrag"]');
+      fdrag.addEventListener("dragstart",e=>{
+        e.stopPropagation();
+        e.dataTransfer.setData("text/fid",f.id);
+        e.dataTransfer.setData("text/moduleid",m.id);
+        tr.classList.add("dragging");
+      });
+      fdrag.addEventListener("dragend",()=>tr.classList.remove("dragging"));
+      tr.addEventListener("dragover",e=>{if(state.editMode)e.preventDefault();});
+      tr.addEventListener("drop",e=>{
+        if(!state.editMode)return;
+        e.preventDefault();e.stopPropagation();
+        const dfid=e.dataTransfer.getData("text/fid");
+        const dmid=e.dataTransfer.getData("text/moduleid");
+        if(dmid!==m.id||dfid===f.id)return;
+        const arr=m.functions;
+        const fi=arr.findIndex(x=>x.id===dfid);
+        const ti=arr.findIndex(x=>x.id===f.id);
+        const[mv]=arr.splice(fi,1);arr.splice(ti,0,mv);
+        renderModules();applyFilters();markDirty();
+      });
+    });
+
+    // Head click (collapse)
+    sec.querySelector('[data-role="head"]').addEventListener("click",e=>{
+      if(e.target.closest('[data-role="mdrag"],[data-role="zoom"],input,textarea,[data-role="imgbox"],[data-role="deletemodule"]'))return;
+      sec.classList.toggle("collapsed");
+    });
+
+    // Zoom
+    sec.querySelector('[data-role="zoom"]').addEventListener("click",e=>{
+      e.stopPropagation();openLightbox(m.name,m.image);
+    });
+
+    // Add function
+    sec.querySelector('[data-role="addfn"]').addEventListener("click",e=>{
+      e.stopPropagation();
+      if(!state.editMode)return;
+      const nf={id:newFid(),name:"Yeni fonksiyon",desc:"Açıklama girin.",imp:"Orta",status:"İncelenecek",note:"",image:""};
+      m.functions.push(nf);
+      sec.classList.remove("collapsed");
+      renderModules();renderStats();applyFilters();
+      const ns=modulesContainer.querySelector(`.module[data-module-id="${m.id}"]`);
+      ns&&ns.classList.remove("collapsed");
+      const nt=ns&&ns.querySelector(`tr[data-fid="${nf.id}"]`);
+      if(nt){nt.scrollIntoView({behavior:"smooth",block:"center"});const ni=nt.querySelector('[data-role="name"]');ni&&(ni.focus(),ni.select());}
+      markDirty();showToast("Fonksiyon eklendi");
+    });
+
+    // Delete module
+    sec.querySelector('[data-role="deletemodule"]').addEventListener("click",e=>{
+      e.stopPropagation();
+      if(!state.editMode)return;
+      if(!confirm(`"${m.name}" modülünü silmek istediğine emin misin?`))return;
+      DATA.splice(DATA.findIndex(x=>x.id===m.id),1);
+      if(state.module===m.id)state.module="all";
+      populateModuleFilter();renderStats();renderModules();applyFilters();markDirty();
+      showToast("Modül silindi");
+    });
+
+    // Module name/desc
+    sec.querySelector('[data-role="modname"]').addEventListener("blur",e=>{
+      const v=e.target.value.trim();
+      if(v&&m.name!==v){m.name=v;populateModuleFilter();moduleFilter.value=state.module;markDirty();}
+      else e.target.value=m.name;
+    });
+    sec.querySelector('[data-role="moddesc"]').addEventListener("input",e=>autoResizeTextarea(e.target));
+    sec.querySelector('[data-role="moddesc"]').addEventListener("blur",e=>{
+      const v=e.target.value.trim();
+      if(v&&m.desc!==v){m.desc=v;markDirty();}else e.target.value=m.desc;
+      autoResizeTextarea(e.target);
+    });
+
+    // Module drag
+    const mdrag=sec.querySelector('[data-role="mdrag"]');
+    mdrag.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/moduleorder",m.id);sec.classList.add("dragging");});
+    mdrag.addEventListener("dragend",()=>sec.classList.remove("dragging"));
+    sec.addEventListener("dragover",e=>{if(state.editMode)e.preventDefault();});
+    sec.addEventListener("drop",e=>{
+      if(!state.editMode)return;
+      const did=e.dataTransfer.getData("text/moduleorder");
+      if(!did||did===m.id)return;
+      e.preventDefault();e.stopPropagation();
+      const fi=DATA.findIndex(x=>x.id===did);
+      const ti=DATA.findIndex(x=>x.id===m.id);
+      const[mv]=DATA.splice(fi,1);DATA.splice(ti,0,mv);
+      renderModules();applyFilters();markDirty();
+    });
+
+    modulesContainer.appendChild(sec);
+  });
+  autoResizeAllTextareas();
+}
+
+function renderModuleBadges(sec,m){
+  const c=modCounts(m);
+  const bd=sec.querySelectorAll(".module-badges .badge");
+  bd[0].textContent=m.functions.length+" alt modül";
+  bd[1].textContent=c.Kritik+" kritik";
+  bd[2].textContent=c.Yüksek+" yüksek";
+  bd[3].textContent=c.Orta+" orta";
+  bd[4].textContent=c.Düşük+" düşük";
+}
+
+function applyFilters(){
+  const q=state.search.trim().toLocaleLowerCase("tr");
+  document.querySelectorAll(".module").forEach(sec=>{
+    const mid=sec.dataset.moduleId;
+    if(state.module!=="all"&&state.module!==mid){sec.style.display="none";return;}
+    sec.style.display="";
+    const mod=DATA.find(m=>m.id===mid);
+    if(!mod)return;
+    // Boş modüller filtre yoksa göster
+    if(mod.functions.length===0){
+      sec.style.display=(q||state.importance!=="all"||state.onlyCritical)?"none":"";
+      return;
+    }
+    let vis=0;
+    sec.querySelectorAll("tr.fn-row").forEach(tr=>{
+      const f=mod.functions.find(x=>x.id===tr.dataset.fid);
+      if(!f){tr.classList.add("hidden-row");return;}
+      let match=true;
+      if(q&&!(f.name.toLocaleLowerCase("tr").includes(q)||f.desc.toLocaleLowerCase("tr").includes(q)))match=false;
+      if(state.importance!=="all"&&f.imp!==state.importance)match=false;
+      if(state.onlyCritical&&f.imp!=="Kritik")match=false;
+      tr.classList.toggle("hidden-row",!match);
+      if(match)vis++;
+    });
+    sec.style.display=vis===0?"none":"";
+  });
+  const any=[...document.querySelectorAll(".module")].some(s=>s.style.display!=="none");
+  let em=modulesContainer.querySelector(".empty-state");
+  if(!any){if(!em){em=document.createElement("div");em.className="empty-state";em.textContent="Arama ve filtre kriterlerine uyan alt modül bulunamadı.";modulesContainer.appendChild(em);}}
+  else if(em)em.remove();
+}
+
+/* ======== DETAIL PANEL ======== */
+const overlay=document.getElementById("overlay");
+const detailPanel=document.getElementById("detailPanel");
+const detailImgWrap=document.getElementById("detailImgWrap");
+const detailImgEl=document.getElementById("detailImgEl");
+const detailImgPlaceholder=document.getElementById("detailImgPlaceholder");
+const detailImgInput=document.getElementById("detailImgInput");
+const detailSaveBar=document.getElementById("detailSaveBar");
+
+let curMod=null,curFn=null,pendingImg=null;
+
+function openDetail(m,f){
+  curMod=m;curFn=f;pendingImg=null;
+  document.getElementById("dModule").textContent=m.name;
+  document.getElementById("dName").textContent=f.name;
+  document.getElementById("dDesc").textContent=f.desc;
+  document.getElementById("dImp").innerHTML=`<span class="badge ${badgeClass(f.imp)}">${f.imp}</span>`;
+  document.getElementById("dStatus").innerHTML=`<span class="badge" data-status="${f.status}">${f.status}</span>`;
+  document.getElementById("dNote").textContent=f.note||"—";
+  updateDetailImg(f.image||"");
+  detailSaveBar.classList.remove("visible");
+  overlay.classList.add("show");
+  detailPanel.classList.add("show");
+}
+
+function updateDetailImg(src){
+  if(src){
+    detailImgEl.src=src;detailImgEl.style.display="block";
+    detailImgPlaceholder.style.display="none";
+  }else{
+    detailImgEl.src="";detailImgEl.style.display="none";
+    detailImgPlaceholder.style.display="flex";
+  }
+}
+
+detailImgWrap.addEventListener("click",()=>{if(curFn)detailImgInput.click();});
+detailImgInput.addEventListener("change",e=>{
+  const file=e.target.files[0];if(!file||!curFn)return;
+  const reader=new FileReader();
+  reader.onload=function(evt){
+    pendingImg=evt.target.result;
+    updateDetailImg(pendingImg);
+    detailSaveBar.classList.add("visible");
+  };
+  reader.readAsDataURL(file);
+  e.target.value="";
+});
+
+document.getElementById("detailSaveBtn").addEventListener("click",()=>{
+  if(curFn&&pendingImg!==null){
+    curFn.image=pendingImg;
+    // Modül resmi yoksa modüle de ata
+    if(curMod&&!curMod.image){
+      curMod.image=pendingImg;
+      const ms=modulesContainer.querySelector(`.module[data-module-id="${curMod.id}"]`);
+      if(ms){
+        const ib=ms.querySelector('[data-role="imgbox"]');
+        const zb=ib.querySelector('[data-role="zoom"]');
+        const fi=ib.querySelector('[data-role="imginput"]');
+        ib.innerHTML=`<img src="${curMod.image}" style="width:100%;height:100%;object-fit:cover;">`;
+        ib.appendChild(zb);ib.appendChild(fi);
+      }
+    }
+    markDirty();saveData();
+    detailSaveBar.classList.remove("visible");
+    pendingImg=null;
+    showToast("✅ Resim kaydedildi");
+  }
+});
+
+document.getElementById("detailDiscardBtn").addEventListener("click",()=>{
+  pendingImg=null;
+  updateDetailImg(curFn?curFn.image||"":"");
+  detailSaveBar.classList.remove("visible");
+});
+
+function closeDetail(){
+  overlay.classList.remove("show");detailPanel.classList.remove("show");
+  curMod=null;curFn=null;pendingImg=null;
+  detailImgInput.value="";
+}
+overlay.addEventListener("click",closeDetail);
+document.getElementById("detailClose").addEventListener("click",closeDetail);
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){
+    if(detailPanel.classList.contains("show")) closeDetail();
+    if(lightbox.classList.contains("show")) lightbox.classList.remove("show");
+  }
+});
+
+/* ======== LIGHTBOX ======== */
+const lightbox=document.getElementById("lightbox");
+function openLightbox(title,imgData){
+  document.getElementById("lbTitle").textContent=title;
+  const li=lightbox.querySelector(".lightbox-inner");
+  const old=li.querySelector("img");if(old)old.remove();
+  const lbNote=document.getElementById("lbNote");
+  if(imgData){
+    const img=document.createElement("img");
+    img.src=imgData;img.style.cssText="max-width:100%;max-height:70vh;border-radius:8px;";
+    li.insertBefore(img,lbNote);lbNote.style.display="none";
+  }else{lbNote.style.display="";lbNote.textContent="Bu modül için henüz ekran görüntüsü yüklenmedi.";}
+  lightbox.classList.add("show");
+}
+document.getElementById("lbClose").addEventListener("click",()=>lightbox.classList.remove("show"));
+lightbox.addEventListener("click",e=>{if(e.target===lightbox)lightbox.classList.remove("show");});
+
+let toastTimer;
+function showToast(msg){
+  const t=document.getElementById("toast");
+  document.getElementById("toastMsg").textContent=msg||"Kaydedildi";
+  t.classList.add("show");clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove("show"),2600);
+}
+
+/* ======== CONTROLS ======== */
+document.getElementById("searchInput").addEventListener("input",e=>{state.search=e.target.value;applyFilters();});
+moduleFilter.addEventListener("change",e=>{state.module=e.target.value;applyFilters();});
+document.getElementById("importanceFilter").addEventListener("change",e=>{state.importance=e.target.value;applyFilters();});
+const critBtn=document.getElementById("criticalOnlyBtn");
+critBtn.addEventListener("click",()=>{state.onlyCritical=!state.onlyCritical;critBtn.classList.toggle("active",state.onlyCritical);applyFilters();});
+
+const editBtn=document.getElementById("editModeBtn");
+editBtn.addEventListener("click",()=>{
+  state.editMode=!state.editMode;
+  document.body.classList.toggle("edit-mode",state.editMode);
+  editBtn.classList.toggle("on",state.editMode);
+  editBtn.textContent=state.editMode?"Düzenleme modunu kapat":"Düzenleme modunu aç";
+  document.querySelectorAll('select[data-role="imp"],select[data-role="status"],input[data-role="note"],input[data-role="name"],textarea[data-role="desc"],input[data-role="modname"],textarea[data-role="moddesc"]').forEach(el=>{
+    el.disabled=!state.editMode;
+  });
+  autoResizeAllTextareas();
+});
+
+document.getElementById("saveBtn").addEventListener("click",saveData);
+
+// Yeni modül ekle — boş modüller de görünür
+document.getElementById("addModuleBtn").addEventListener("click",()=>{
+  if(!state.editMode)return;
+  const nm={id:newMid(),name:"Yeni Modül",icon:"📁",desc:"Bu modülün açıklamasını girin.",image:"",functions:[]};
+  DATA.push(nm);
+  populateModuleFilter();renderStats();renderModules();applyFilters();
+  const ns=modulesContainer.querySelector(`.module[data-module-id="${nm.id}"]`);
+  if(ns){
+    ns.scrollIntoView({behavior:"smooth",block:"start"});
+    setTimeout(()=>{const inp=ns.querySelector('[data-role="modname"]');if(inp){inp.focus();inp.select();}},200);
+  }
+  markDirty();showToast("Modül eklendi — 💾 Kaydet butonuna basın");
+});
+
+let allExp=false;
+document.getElementById("expandAllBtn").addEventListener("click",()=>{
+  allExp=!allExp;
+  document.querySelectorAll(".module").forEach(s=>s.classList.toggle("collapsed",!allExp));
+  document.getElementById("expandAllBtn").textContent=allExp?"Tümünü daralt":"Tümünü genişlet";
+  autoResizeAllTextareas();
+});
+document.getElementById("printBtn").addEventListener("click",()=>{
+  document.querySelectorAll(".module").forEach(s=>s.classList.remove("collapsed"));
+  autoResizeAllTextareas();
+  window.print();
+});
+document.getElementById("exportCsvBtn").addEventListener("click",()=>{
+  const rows=[["Modül","Alt Modül","Kısa Açıklama","Önem Derecesi","Kullanım Durumu","Yönetici Notu"]];
+  DATA.forEach(m=>m.functions.forEach(f=>rows.push([m.name,f.name,f.desc,f.imp,f.status,f.note])));
+  const csv=rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(",")).join("\r\n");
+  const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");a.href=url;a.download="tys-modul-alt-modul.csv";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+});
+
+window.addEventListener("resize",autoResizeAllTextareas);
+
+// Boot
+renderStats();populateModuleFilter();renderModules();applyFilters();autoResizeAllTextareas();
+</script>
+</body>
+</html>

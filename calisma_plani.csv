@@ -1,0 +1,10 @@
+Görev Kategorisi;Görev Adı;Açıklama;Öncelik;Durum;Sorumlu;Termin Tarihi
+Portal Talepleri;Taleplerin Sınıflandırılması;Gelen taleplerin kritik, normal ve düşük olarak etiketlenmesi;Yüksek;Bekliyor;;
+Portal Talepleri;İş Dağılımı ve Takip;Taleplerin ilgili kişilere atanması ve durumlarının takip edilmesi;Yüksek;Bekliyor;;
+Portal Talepleri;Talep Raporlama;Tamamlanan veya bekleyen taleplerin haftalık raporlanması;Orta;Bekliyor;;
+Tesis Bakımları;Bakım Takvimi Oluşturma;Tesislerin periyodik (haftalık/aylık) bakım takviminin planlanması;Yüksek;Bekliyor;;
+Tesis Bakımları;Kontrol Listesi Hazırlama;Bakım sırasında kontrol edilecek standartların ve süreçlerin listelenmesi;Orta;Bekliyor;;
+Tesis Bakımları;Arıza Yönetim Süreci;Acil arızalar için müdahale eylem planının oluşturulması;Yüksek;Bekliyor;;
+Spor Okulu Geliştirme;Test Senaryolarının Yazılması;Kayıt ve ödeme modülleri için test senaryolarının (UAT) hazırlanması;Yüksek;Bekliyor;;
+Spor Okulu Geliştirme;Testlerin Koşulması;Farklı cihaz ve tarayıcılarda test yapılması ve hataların raporlanması;Yüksek;Bekliyor;;
+Spor Okulu Geliştirme;Hata (Bug) Çözümü ve Onay;Hataların düzeltilmesi, regresyon testleri ve canlıya alma onayı;Yüksek;Bekliyor;;
