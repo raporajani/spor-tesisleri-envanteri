@@ -31,9 +31,9 @@
   a{color:inherit;}
   
   /* Header Component */
-  .topbar{background:#EEF0F9;color:#000;padding:32px 40px;box-shadow:0 4px 16px rgba(15,23,42,.08);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;}
-  .topbar h1{margin:0 0 8px;font-size:24px;font-weight:700;letter-spacing:-.015em;line-height:1.2;color:#000;}
-  .topbar p.sub{margin:0;color:#000;font-size:14px;font-weight:500;}
+  .topbar{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:32px 40px;box-shadow:0 4px 16px rgba(15,23,42,.08);}
+  .topbar h1{margin:0 0 8px;font-size:24px;font-weight:700;letter-spacing:-.015em;line-height:1.2;}
+  .topbar p.sub{margin:0;color:#94A3B8;font-size:14px;font-weight:500;}
   
   /* KPI Statistics Cards - 8pt Grid */
   .stats-bar{max-width:1280px;margin:24px auto 0;padding:0 40px;}
@@ -361,12 +361,30 @@
   </div>
 </div>
 
+<div class="lightbox" id="pwOverlay">
+  <div class="lightbox-inner" style="gap:20px;">
+    <div class="title">🔒 Düzenleme Modu</div>
+    <div class="note">Devam etmek için parolayı girin</div>
+    <input type="password" id="pwInput" placeholder="Parola" autocomplete="off" style="width:220px;padding:10px 14px;border:1px solid var(--border-strong);border-radius:var(--radius-sm);font-size:14px;font-family:inherit;text-align:center;">
+    <div id="pwError" style="color:var(--crit-fg);font-size:12.5px;font-weight:600;display:none;">⚠️ Parola hatalı</div>
+    <div style="display:flex;gap:12px;">
+      <button class="lightbox-close" id="pwCancel">İptal</button>
+      <button class="btn primary" id="pwSubmit">Giriş Yap</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"><span class="dot"></span><span id="toastMsg">Kaydedildi</span></div>
 
 <script>
 const IMP_ORDER=["Kritik","Yüksek","Orta","Düşük"];
 const STATUS_OPTIONS=["Aktif","Pasif","Eski Ekran","Yeni Sürüm","İncelenecek","Birleştirilebilir"];
 const STORAGE_KEY="tys_modul_data_v5";
+const EDIT_PASSWORD_HASH="d1e2d10fd46744cd19aa32707b8697e1bf5f72241a5e06bf466e443029b02a3b";
+async function sha256Hex(str){
+  const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str));
+  return[...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+}
 
 const DEFAULT_DATA=[
   {id:"tanimlar",name:"Tanımlar Modülü",icon:"ℹ️",desc:"Tesis, salon, kurum, indirim, devamsızlık ve genel sistem tanımlamalarının yönetildiği TYS modüldür.",image:"",
@@ -1018,8 +1036,44 @@ document.getElementById("importanceFilter").addEventListener("change",e=>{state.
 const critBtn=document.getElementById("criticalOnlyBtn");
 critBtn.addEventListener("click",()=>{state.onlyCritical=!state.onlyCritical;critBtn.classList.toggle("active",state.onlyCritical);applyFilters();});
 
+const pwOverlay=document.getElementById("pwOverlay");
+const pwInput=document.getElementById("pwInput");
+const pwError=document.getElementById("pwError");
+const pwSubmit=document.getElementById("pwSubmit");
+const pwCancel=document.getElementById("pwCancel");
+function askEditPassword(){
+  return new Promise(resolve=>{
+    pwInput.value="";pwError.style.display="none";
+    pwOverlay.classList.add("show");
+    setTimeout(()=>pwInput.focus(),50);
+    function cleanup(result){
+      pwOverlay.classList.remove("show");
+      pwSubmit.removeEventListener("click",onSubmit);
+      pwCancel.removeEventListener("click",onCancel);
+      pwInput.removeEventListener("keydown",onKeydown);
+      pwOverlay.removeEventListener("click",onOverlayClick);
+      resolve(result);
+    }
+    async function onSubmit(){
+      const ok=(await sha256Hex(pwInput.value))===EDIT_PASSWORD_HASH;
+      if(ok){cleanup(true);}else{pwError.style.display="block";pwInput.value="";pwInput.focus();}
+    }
+    function onCancel(){cleanup(false);}
+    function onKeydown(e){if(e.key==="Enter")onSubmit();if(e.key==="Escape")onCancel();}
+    function onOverlayClick(e){if(e.target===pwOverlay)onCancel();}
+    pwSubmit.addEventListener("click",onSubmit);
+    pwCancel.addEventListener("click",onCancel);
+    pwInput.addEventListener("keydown",onKeydown);
+    pwOverlay.addEventListener("click",onOverlayClick);
+  });
+}
+
 const editBtn=document.getElementById("editModeBtn");
-editBtn.addEventListener("click",()=>{
+editBtn.addEventListener("click",async()=>{
+  if(!state.editMode){
+    const ok=await askEditPassword();
+    if(!ok)return;
+  }
   state.editMode=!state.editMode;
   document.body.classList.toggle("edit-mode",state.editMode);
   editBtn.classList.toggle("on",state.editMode);
