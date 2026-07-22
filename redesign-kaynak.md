@@ -1,3 +1,8 @@
+# Spor Tesisleri Şube Müdürlüğü — Modül ve Alt Modül Envanteri (Mevcut HTML)
+
+Aşağıdaki HTML, mevcut canlı sitenin tam kaynak kodudur (CSS dahil, tek dosya, backend yok). Google Stitch üzerinde bu tasarımın yeniden tasarımını (redesign) yapmak için referans olarak kullanılabilir.
+
+```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -31,9 +36,9 @@
   a{color:inherit;}
   
   /* Header Component */
-  .topbar{background:#EEF0F9;color:#000;padding:32px 40px;box-shadow:0 4px 16px rgba(15,23,42,.08);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;}
-  .topbar h1{margin:0 0 8px;font-size:24px;font-weight:700;letter-spacing:-.015em;line-height:1.2;color:#000;}
-  .topbar p.sub{margin:0;color:#000;font-size:14px;font-weight:500;}
+  .topbar{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:32px 40px;box-shadow:0 4px 16px rgba(15,23,42,.08);}
+  .topbar h1{margin:0 0 8px;font-size:24px;font-weight:700;letter-spacing:-.015em;line-height:1.2;}
+  .topbar p.sub{margin:0;color:#94A3B8;font-size:14px;font-weight:500;}
   
   /* KPI Statistics Cards - 8pt Grid */
   .stats-bar{max-width:1280px;margin:24px auto 0;padding:0 40px;}
@@ -1075,3 +1080,5 @@ renderStats();populateModuleFilter();renderModules();applyFilters();autoResizeAl
 </script>
 </body>
 </html>
+
+```
