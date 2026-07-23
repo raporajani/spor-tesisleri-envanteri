@@ -685,20 +685,44 @@ const DEFAULT_DATA=[
   ]}
 ];
 
-/* ======== LocalStorage ======== */
-function loadData(){
+/* ======== Sunucu Depolama (Vercel Blob) + Yerel Önbellek ======== */
+let editToken="";
+function loadCachedData(){
   try{
     const raw=localStorage.getItem(STORAGE_KEY);
     if(raw){const p=JSON.parse(raw);if(Array.isArray(p)&&p.length>0)return p;}
   }catch(e){}
   return JSON.parse(JSON.stringify(DEFAULT_DATA));
 }
-function saveData(){
+async function apiLoad(){
   try{
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(DATA));
-    showToast("✅ Tüm değişiklikler kaydedildi");
+    const r=await fetch("/api/data",{cache:"no-store"});
+    if(!r.ok)return undefined;
+    const j=await r.json();
+    return j.data;
+  }catch(e){return undefined;}
+}
+async function apiSave(data){
+  const r=await fetch("/api/data",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({password:editToken,data})
+  });
+  if(!r.ok){
+    let code="save_failed";
+    try{const j=await r.json();code=j.error||code;}catch(e){}
+    throw new Error(code);
+  }
+}
+async function saveData(){
+  try{
+    await apiSave(DATA);
+    try{localStorage.setItem(STORAGE_KEY,JSON.stringify(DATA));}catch(e){}
+    showToast("✅ Tüm değişiklikler yayınlandı");
     markDirty(false);
-  }catch(e){showToast("⚠️ Kayıt başarısız");}
+  }catch(e){
+    showToast(e.message==="unauthorized"?"⚠️ Oturum süresi doldu, tekrar giriş yapın":"⚠️ Kayıt başarısız, bağlantınızı kontrol edin");
+  }
 }
 
 let isDirty=false;
@@ -708,17 +732,20 @@ function markDirty(d=true){
   isDirty?btn.classList.add("visible"):btn.classList.remove("visible");
 }
 
-let DATA=loadData();
 let fidCtr=0;
-DATA.forEach(m=>{
-  m.image=""; // Modüller kendi resmini yönetemiyor; eski bir hatadan miras kalmış olası verileri temizler
-  m.functions.forEach(f=>{
-    if(!f.id)f.id="f"+(fidCtr++);
-    if(!f.status)f.status="Aktif";
-    if(!f.note)f.note="";
-    if(!f.image)f.image="";
+function normalizeData(arr){
+  arr.forEach(m=>{
+    m.image=""; // Modüller kendi resmini yönetemiyor; eski bir hatadan miras kalmış olası verileri temizler
+    m.functions.forEach(f=>{
+      if(!f.id)f.id="f"+(fidCtr++);
+      if(!f.status)f.status="Aktif";
+      if(!f.note)f.note="";
+      if(!f.image)f.image="";
+    });
   });
-});
+  return arr;
+}
+let DATA=[];
 
 const state={search:"",module:"all",importance:"all",onlyCritical:false,editMode:false,usage:"all"};
 function usageBucket(status){
@@ -1213,7 +1240,7 @@ function askEditPassword(){
     }
     async function onSubmit(){
       const ok=(await sha256Hex(pwInput.value))===EDIT_PASSWORD_HASH;
-      if(ok){cleanup(true);}else{pwError.style.display="block";pwInput.value="";pwInput.focus();}
+      if(ok){editToken=pwInput.value;cleanup(true);}else{pwError.style.display="block";pwInput.value="";pwInput.focus();}
     }
     function onCancel(){cleanup(false);}
     function onKeydown(e){if(e.key==="Enter")onSubmit();if(e.key==="Escape")onCancel();}
@@ -1232,6 +1259,7 @@ editBtn.addEventListener("click",async()=>{
     if(!ok)return;
   }
   state.editMode=!state.editMode;
+  if(!state.editMode)editToken="";
   document.body.classList.toggle("edit-mode",state.editMode);
   editBtn.classList.toggle("on",state.editMode);
   editBtn.textContent=state.editMode?"Düzenleme modunu kapat":"Düzenleme modunu aç";
@@ -1285,8 +1313,19 @@ document.getElementById("exportCsvBtn").addEventListener("click",()=>{
 
 window.addEventListener("resize",autoResizeAllTextareas);
 
-// Boot
-renderStats();populateModuleFilter();renderModules();applyFilters();autoResizeAllTextareas();
+// Boot — önce sunucudan (Vercel Blob) veriyi çekmeyi dener; başarısız olursa yerel önbelleğe/varsayılana düşer
+async function boot(){
+  modulesContainer.innerHTML='<div class="empty-state">Yükleniyor…</div>';
+  const remote=await apiLoad();
+  if(Array.isArray(remote)&&remote.length>0){
+    DATA=normalizeData(remote);
+    try{localStorage.setItem(STORAGE_KEY,JSON.stringify(DATA));}catch(e){}
+  }else{
+    DATA=normalizeData(loadCachedData());
+  }
+  renderStats();populateModuleFilter();renderModules();applyFilters();autoResizeAllTextareas();
+}
+boot();
 </script>
 </body>
 </html>
